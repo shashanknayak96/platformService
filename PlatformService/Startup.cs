@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PlatformService.Data;
+using PlatformService.SyncDataServices;
+using PlatformService.SyncDataServices.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,7 @@ namespace PlatformService
                 opt.UseInMemoryDatabase("InMem")
             );
             services.AddScoped<IPlatformRepo, PlatformRepo>();
+            services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
