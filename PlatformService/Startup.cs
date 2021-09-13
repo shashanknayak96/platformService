@@ -29,18 +29,9 @@ namespace PlatformService
         {
             services.AddControllers();
             services.AddSwaggerGen();
-
-
-            //Using SQL Server
-            Console.WriteLine("==> Using SQL Database");
             services.AddDbContext<AppDbContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("PlatformConn"))
+                opt.UseInMemoryDatabase("InMem")
             );
-
-            //Using In Memory Database
-            //services.AddDbContext<AppDbContext>(opt =>
-            //    opt.UseInMemoryDatabase("InMem")
-            //);
             services.AddScoped<IPlatformRepo, PlatformRepo>();
             services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
